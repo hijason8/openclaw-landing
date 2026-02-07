@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw - 本地 AI 助手 | 優勢與安裝指南</title>
+    <meta name="description" content="了解 OpenClaw 本地 AI 助手相較於網頁版大語言模型的優勢，以及如何安裝與設定。">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #10b981;
+            --bg-dark: #0f172a;
+            --bg-card: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 80px 0;
+            background: linear-gradient(180deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
+        }
+
+        .logo {
+            font-size: 64px;
+            margin-bottom: 24px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: 40px;
+        }
+
+        .hero .cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-child {
+            border-bottom: none;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title .icon {
+            font-size: 1.5rem;
+        }
+
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+        }
+
+        /* Benefits Grid */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .benefit-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 28px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .benefit-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .benefit-card h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .benefit-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Comparison Table */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 24px;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 16px 20px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table th {
+            background: var(--bg-card);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
+        }
+
+        .comparison-table td {
+            font-size: 0.95rem;
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .check {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+
+        .cross {
+            color: #ef4444;
+            font-size: 1.2rem;
+        }
+
+        .highlight {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Installation Steps */
+        .steps {
+            counter-reset: step;
+        }
+
+        .step {
+            display: flex;
+            gap: 24px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            width: 48px;
+            height: 48px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content {
+            flex: 1;
+            padding-top: 8px;
+        }
+
+        .step h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border-radius: 12px;
+            padding: 20px;
+            overflow-x: auto;
+            font-family: "SF Mono", Monaco, "Cascadia Code", monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            border: 1px solid var(--border);
+        }
+
+        .code-block code {
+            color: #e6edf3;
+        }
+
+        .code-block .comment {
+            color: #8b949e;
+        }
+
+        .code-block .command {
+            color: #7ee787;
+        }
+
+        .code-block .path {
+            color: #79c0ff;
+        }
+
+        .code-block .keyword {
+            color: #ff7b72;
+        }
+
+        /* Requirements */
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 16px;
+            margin-bottom: 40px;
+        }
+
+        .req-item {
+            background: var(--bg-card);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid var(--border);
+        }
+
+        .req-item .icon {
+            font-size: 2rem;
+            margin-bottom: 12px;
+        }
+
+        .req-item h4 {
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .req-item p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Tips Section */
+        .tips-list {
+            list-style: none;
+        }
+
+        .tips-list li {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+        }
+
+        .tips-list .tip-icon {
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .tips-list h4 {
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .tips-list p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .comparison-table {
+                font-size: 0.85rem;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+
+            .step {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .step::before {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Smooth scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="logo">🦞</div>
+            <h1>OpenClaw</h1>
+            <p class="tagline">
+                一個強大的本地 AI 助手框架，讓你在自己的裝置上擁有完整的 AI 能力。<br>
+                完全隱私、極速回應、無限可能。
+            </p>
+            <div class="hero">
+                <a href="#installation" class="btn btn-primary">
+                    <span>🚀</span> 立即安裝
+                </a>
+                <a href="https://github.com/openclaw/openclaw" class="btn btn-secondary" target="_blank">
+                    <span>📦</span> GitHub
+                </a>
+                <a href="https://docs.openclaw.ai" class="btn btn-secondary" target="_blank">
+                    <span>📖</span> 文檔
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why OpenClaw -->
+    <section id="benefits">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">💎</span>
+                為什麼選擇 OpenClaw？
+            </h2>
+            <p class="section-desc">
+                相較於傳統的網頁版大語言模型，OpenClaw 提供了許多獨特的優勢。
+            </p>
+
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔒</div>
+                    <h3>完全隱私</h3>
+                    <p>所有對話和資料都儲存在本地，不會被上傳到任何伺服器。你的秘密永遠只有你知道。</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">⚡</div>
+                    <h3>極速回應</h3>
+                    <p>無需等待網路連線，Instant 回應。特別適合需要頻繁互動的工作流程。</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">💰</div>
+                    <h3>成本可控</h3>
+                    <p>一次安裝，終身使用。不用擔心 API 費用暴增或意外扣款。</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔌</div>
+                    <h3>無限工具</h3>
+                    <p>可以整合檔案系統、終端機、瀏覽器、相機等各種本地工具。</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔧</div>
+                    <h3>高度自訂</h3>
+                    <p>完全掌控你的 AI 助手。從提示詞到工具鏈，一切都可以客製化。</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🌐</div>
+                    <h3>離線可用</h3>
+                    <p>不需要網路也能使用。飛機上、地鐵裡，隨時隨地都能使用。</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">🔗</div>
+                    <h3>多模型支援</h3>
+                    <p>自由切換不同 AI 模型，本地模型（如 Ollama）或雲端 API 任你選。</p>
+                </div>
+
+                <div class="benefit-card">
+                    <div class="benefit-icon">📱</div>
+                    <h3>多平台整合</h3>
+                    <p>支援 Telegram、Discord、WhatsApp 等多種通訊平台，隨時隨地都能溝通。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Comparison -->
+    <section id="comparison">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">⚖️</span>
+                功能對比
+            </h2>
+            <p class="section-desc">
+                快速了解 OpenClaw 與傳統網頁版 AI 的差異。
+            </p>
+
+            <div style="overflow-x: auto;">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>功能</th>
+                            <th>OpenClaw (本地)</th>
+                            <th>網頁版 AI</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>隱私保護</td>
+                            <td class="highlight">✅ 資料完全本地儲存</td>
+                            <td>⚠️ 資料上傳至伺服器</td>
+                        </tr>
+                        <tr>
+                            <td>回應速度</td>
+                            <td class="highlight">✅ 毫秒級回應</td>
+                            <td>⚠️ 取決於網路連線</td>
+                        </tr>
+                        <tr>
+                            <td>使用成本</td>
+                            <td class="highlight">✅ 一次付費，終身使用</td>
+                            <td>⚠️ 訂閱制或按量計費</td>
+                        </tr>
+                        <tr>
+                            <td>檔案存取</td>
+                            <td class="highlight">✅ 完整系統存取</td>
+                            <td>⚠️ 僅限對話內容</td>
+                        </tr>
+                        <tr>
+                            <td>工具整合</td>
+                            <td class="highlight">✅ 終端機、瀏覽器、檔案系統</td>
+                            <td>⚠️ 功能受限</td>
+                        </tr>
+                        <tr>
+                            <td>離線使用</td>
+                            <td class="highlight">✅ 支援</td>
+                            <td>⚠️ 需要網路</td>
+                        </tr>
+                        <tr>
+                            <td>自訂能力</td>
+                            <td class="highlight">✅ 完全開源，可任意修改</td>
+                            <td>⚠️ 受限於平台政策</td>
+                        </tr>
+                        <tr>
+                            <td>多平台支援</td>
+                            <td class="highlight">✅ Telegram、Discord、Line 等</td>
+                            <td>⚠️ 僅網頁版</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <!-- Installation -->
+    <section id="installation">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">📥</span>
+                安裝指南
+            </h2>
+            <p class="section-desc">
+                以下是在 macOS 上安裝 OpenClaw 的完整流程。
+            </p>
+
+            <h3 style="margin-bottom: 20px; font-size: 1.25rem;">📋 系統需求</h3>
+            <div class="requirements-grid">
+                <div class="req-item">
+                    <div class="icon">💻</div>
+                    <h4>macOS</h4>
+                    <p>12.0 Monterey 或更新版本</p>
+                </div>
+                <div class="req-item">
+                    <div class="icon">🧠</div>
+                    <h4>記憶體</h4>
+                    <p>建議 8GB 以上（16GB 更佳）</p>
+                </div>
+                <div class="req-item">
+                    <div class="icon">💾</div>
+                    <h4>儲存空間</h4>
+                    <p>至少 5GB 可用空間</p>
+                </div>
+                <div class="req-item">
+                    <div class="icon">🔧</div>
+                    <h4>依賴項目</h4>
+                    <p>Homebrew、Node.js 18+</p>
+                </div>
+            </div>
+
+            <div class="steps">
+                <div class="step">
+                    <div class="step-content">
+                        <h3>安裝 Homebrew（如果尚未安裝）</h3>
+                        <p>Homebrew 是 macOS 上最受歡迎的套件管理器。</p>
+                        <div class="code-block">
+                            <code><span class="comment"># 複製並貼上到終端機執行</span><br>
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <h3>安裝 Node.js</h3>
+                        <p>OpenClaw 需要 Node.js 18 或更新版本。</p>
+                        <div class="code-block">
+                            <code><span class="command">brew install node</span></code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <h3>下載並安裝 OpenClaw</h3>
+                        <p>從官方網站下載最新版本的 OpenClaw 安裝包。</p>
+                        <div class="code-block">
+                            <code><span class="command">brew install --cask openclaw</span><br>
+                            <span class="comment"># 或從官網手動下載：https://openclaw.ai/download</span></code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <h3>首次啟動與設定</h3>
+                        <p>第一次啟動時，OpenClaw 會引導你完成初始設定。</p>
+                        <div class="code-block">
+                            <code><span class="command">open -a OpenClaw</span><br>
+                            <span class="comment"># 或在 Applications 資料夾中點擊 OpenClaw.app</span></code>
+                        </div>
+                        <p style="margin-top: 16px; color: var(--text-secondary);">
+                            設定過程中你可以：<br>
+                            • 選擇喜歡的 AI 模型<br>
+                            • 設定偏好設定<br>
+                            • 連結你的通訊平台（Telegram、Discord 等）
+                        </p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-content">
+                        <h3>驗證安裝</h3>
+                        <p>完成設定後，在對話框中輸入任意內容，確認 OpenClaw 正常運作。</p>
+                        <div class="code-block">
+                            <code><span class="keyword">你好</span>，OpenClaw！<br>
+                            <span class="comment"># 應該會收到回應</span></code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recommendations -->
+    <section id="recommendations">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">💡</span>
+                實用建議
+            </h2>
+            <p class="section-desc">
+                充分發揮 OpenClaw 潛力的最佳實踐。
+            </p>
+
+            <ul class="tips-list">
+                <li>
+                    <div class="tip-icon">🧠</div>
+                    <div>
+                        <h4>選擇適合的 AI 模型</h4>
+                        <p>
+                            如果注重速度，選擇 <strong>MiniMax</strong> 或 <strong>Claude</strong>；<br>
+                            如果注重品質，選擇 <strong>GPT-4</strong> 或 <strong>Gemini Pro</strong>；<br>
+                            如果完全離線需求，使用 <strong>Ollama + Llama 3</strong>。
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="tip-icon">🔗</div>
+                    <div>
+                        <h4>連結多個通訊平台</h4>
+                        <p>
+                            OpenClaw 支援 Telegram、Discord、WhatsApp 等平台。<br>
+                            建議根據用途分開使用，例如：工作用 Discord、個人用 Telegram。
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="tip-icon">⚙️</div>
+                    <div>
+                        <h4>善用系統提示詞</h4>
+                        <p>
+                            透過調整 SOUL.md 和 USER.md，<br>
+                            讓 OpenClaw 更了解你的需求和偏好，提升回答品質。
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="tip-icon">🔒</div>
+                    <div>
+                        <h4>設定 API 配額上限</h4>
+                        <p>
+                            使用雲端 API 時，建議在供應商後台設定每日用量上限，<br>
+                            避免意外費用產生。
+                        </p>
+                    </div>
+                </li>
+                <li>
+                    <div class="tip-icon">📁</div>
+                    <div>
+                        <h4>定期備份設定</h4>
+                        <p>
+                            你的 workspace 包含所有設定和記憶，<br>
+                            建議使用 Git 或 iCloud 定期備份。
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Getting Started -->
+    <section id="getting-started">
+        <div class="container">
+            <h2 class="section-title">
+                <span class="icon">🚀</span>
+                立即開始
+            </h2>
+            <p class="section-desc">
+                準備好體驗本地 AI 助手了嗎？
+            </p>
+
+            <div style="text-align: center; padding: 40px 0;">
+                <a href="#installation" class="btn btn-primary" style="font-size: 1.1rem; padding: 16px 32px;">
+                    <span>📥</span> 下載 OpenClaw
+                </a>
+                <p style="margin-top: 24px; color: var(--text-secondary);">
+                    需要幫助？<a href="https://discord.com/invite/clawd" target="_blank">加入 Discord 社群</a> 或
+                    <a href="https://docs.openclaw.ai" target="_blank">閱讀文檔</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="https://github.com/openclaw/openclaw" target="_blank">GitHub</a>
+                <a href="https://docs.openclaw.ai" target="_blank">文檔</a>
+                <a href="https://discord.com/invite/clawd" target="_blank">Discord</a>
+                <a href="https://openclaw.ai" target="_blank">官網</a>
+            </div>
+            <p>OpenClaw - 開源本地 AI 助手框架</p>
+            <p style="margin-top: 8px; opacity: 0.6;">本頁面由 OpenClaw 協助編寫</p>
+        </div>
+    </footer>
+</body>
+</html>
